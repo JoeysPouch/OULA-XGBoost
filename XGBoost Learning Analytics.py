@@ -206,58 +206,59 @@ plt.show()
 
 
 
-#Top 10 Students
-ed_dic = {
-        'No Formal quals': 0,
-        'Lower Than A Level': 0,
-        'A Level or Equivalent': 0,
-        'HE Qualification': 1,
-        'Post Graduate Qualification': 1
-    }
-df_with_moments['ed_dummy'] = df_with_moments['highest_education']
-df_with_moments['ed_dummy'] = df_with_moments['ed_dummy'].map(ed_dic)
-print(df_with_moments['ed_dummy'])
-
-
-top_dic = {}
-deg_list = []
-for i in range(13):
-    scores_filtered = df_with_moments[df_with_moments['pres_groups'] == i]
-    overall_mean = np.mean(scores_filtered['ed_dummy'])
-    top_10_avg_scores = scores_filtered['avg_score'].nlargest(10) 
-    top_ten = scores_filtered[scores_filtered['avg_score'].isin(top_10_avg_scores)]
-    pres_mean = np.mean(top_ten['ed_dummy'])
-    top_dic[i] = (pres_mean, overall_mean)
-    if i != 2 and i != 4:
-        deg_list.append(pres_mean)
-        print(top_ten)
-print(top_dic)
-print(deg_list)
-total = (100 * round(np.mean(deg_list), 4)), (100 * round(np.mean(df_with_moments['ed_dummy']), 4))
-
-plt.style.use('seaborn')
-fig, axs = plt.subplots(3,4, figsize = (12,8))
-plt.gca().set_facecolor('lightblue')
-count = 0
-for i, ax in enumerate(axs.flat):
-    if count < len(top_dic):
-        values = top_dic[count]
-        print(values)
-        values_perc = (100 * values[0], 100 * values[1])
-        ax.set_facecolor('lightblue')
-        ax.bar(['% With \nDegree', '% of Module with \nDegree'], values_perc, color = ['blue', 'green'])
-        title = list(pres_modules.keys())[count]
-        ax.set_title(title)
-        ax.set_ylim(0,100)
-        count += 1
-        if count == 2 or count == 4:
+#Top 10 Students (dormant for now)
+if False:
+    ed_dic = {
+            'No Formal quals': 0,
+            'Lower Than A Level': 0,
+            'A Level or Equivalent': 0,
+            'HE Qualification': 1,
+            'Post Graduate Qualification': 1
+        }
+    df_with_moments['ed_dummy'] = df_with_moments['highest_education']
+    df_with_moments['ed_dummy'] = df_with_moments['ed_dummy'].map(ed_dic)
+    print(df_with_moments['ed_dummy'])
+    
+    
+    top_dic = {}
+    deg_list = []
+    for i in range(13):
+        scores_filtered = df_with_moments[df_with_moments['pres_groups'] == i]
+        overall_mean = np.mean(scores_filtered['ed_dummy'])
+        top_10_avg_scores = scores_filtered['avg_score'].nlargest(10) 
+        top_ten = scores_filtered[scores_filtered['avg_score'].isin(top_10_avg_scores)]
+        pres_mean = np.mean(top_ten['ed_dummy'])
+        top_dic[i] = (pres_mean, overall_mean)
+        if i != 2 and i != 4:
+            deg_list.append(pres_mean)
+            print(top_ten)
+    print(top_dic)
+    print(deg_list)
+    total = (100 * round(np.mean(deg_list), 4)), (100 * round(np.mean(df_with_moments['ed_dummy']), 4))
+    
+    plt.style.use('seaborn')
+    fig, axs = plt.subplots(3,4, figsize = (12,8))
+    plt.gca().set_facecolor('lightblue')
+    count = 0
+    for i, ax in enumerate(axs.flat):
+        if count < len(top_dic):
+            values = top_dic[count]
+            print(values)
+            values_perc = (100 * values[0], 100 * values[1])
+            ax.set_facecolor('lightblue')
+            ax.bar(['% With \nDegree', '% of Module with \nDegree'], values_perc, color = ['blue', 'green'])
+            title = list(pres_modules.keys())[count]
+            ax.set_title(title)
+            ax.set_ylim(0,100)
             count += 1
-values = total
-ax.set_ylim(0,100)
-ax.bar(['% With \nDegree', '% of Module with \nDegree'], total, color = ['gold', 'silver'])
-plt.tight_layout()
-plt.show()
-
-
-
-
+            if count == 2 or count == 4:
+                count += 1
+    values = total
+    ax.set_ylim(0,100)
+    ax.bar(['% With \nDegree', '% of Module with \nDegree'], total, color = ['gold', 'silver'])
+    plt.tight_layout()
+    plt.show()
+    
+    
+    
+    
