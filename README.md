@@ -1,5 +1,7 @@
+# An Experimental Machine Learning Study of High Achievers at the Open University using the Learning Analytics Data Set
+
 This is an exploration of what contributes most to student success at the Open University, using an XGBoost algorithm and the Open University
-Learning Analytics Data Set. It constitutes my first solo ML personal project.
+Learning Analytics Data Set. It constitutes my first solo ML personal project (following the completion of Andrew Ng's 'Advanced Learning Algorithms' course).
 
 ## Tech Stack
 
